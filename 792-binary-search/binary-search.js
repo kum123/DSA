@@ -11,7 +11,7 @@ var search = function(nums, target) {
         // Under this condition
         while (left <= right) {
             // Get the middle index and the middle value.
-            let mid = Math.floor((left +right)/2);
+            let mid =  Math.floor(left + (right - left) / 2); // Math.floor((left +right)/2);
             
             // Case 1, return the middle index.
             if (nums[mid] == target) {
