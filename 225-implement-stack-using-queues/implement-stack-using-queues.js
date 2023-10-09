@@ -11,11 +11,14 @@ var MyStack = function() {
  * @return {void}
  */
 MyStack.prototype.push = function(x) {
-    const prevLen = this.queue.length;
-    this.queue.push(x);
-    for(let i = 0; i < prevLen; i++){
-        this.queue.push(this.queue.shift());
-    }
+    // const prevLen = this.queue.length;
+    // this.queue.push(x);
+     console.log("before", this.queue)
+    // for(let i = 0; i < prevLen; i++){
+    //     this.queue.push(this.queue.shift());
+    // }
+      console.log("after", this.queue)
+     this.queue.unshift(x);
 };
 
 /**
@@ -24,6 +27,7 @@ MyStack.prototype.push = function(x) {
  */
 MyStack.prototype.pop = function() {
     return this.queue.shift();
+    // return this.queue.pop();
 };
 
 /**
