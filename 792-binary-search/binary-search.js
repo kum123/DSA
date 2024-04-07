@@ -6,28 +6,33 @@
 var search = function(nums, target) {
     
 
-             let left = 0; let right = nums.length - 1;
-        
-        // Under this condition
-        while (left <= right) {
-            // Get the middle index and the middle value.
-            let mid =  Math.floor(left + (right - left) / 2); // Math.floor((left +right)/2);
-            
-            // Case 1, return the middle index.
-            if (nums[mid] == target) {
+
+    // let start = 0;
+    // let end = nums.length-1;
+    // while(start <= end){
+    //     let mid = Math.floor((start+end)/2);
+    //         if(nums[mid] == target){
+    //             return mid;
+    //         }
+    //     if(nums[mid] < target) {
+    //         start = mid + 1; 
+    //     } else {
+    //         end = mid - 1
+    //     }
+    // }
+    // return -1;
+  let start = 0;
+    let end = nums.length-1;
+    while(start <= end){
+        let mid = Math.floor((start+end)/2);
+            if(nums[mid] == target){
                 return mid;
-            } 
-            // Case 2, discard the smaller half.
-            else if (nums[mid] < target) {
-                left = mid + 1;   
-            } 
-            // Case 3, discard the larger half.
-            else {
-                right = mid - 1;
             }
+        if(nums[mid] < target) {
+            start = mid + 1; 
+        } else {
+            end = mid - 1
         }
-        return -1;
-
- 
-
+    }
+    return -1;
 };
