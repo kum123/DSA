@@ -5,103 +5,39 @@
  */
 var minWindow = function(s, t) {
     
-     if (t.length > s.length) return '';
-    
-    const neededChars = {};
-    
-    for (let char of t) {
-        neededChars[char] = (neededChars[char] || 0) + 1;
+     // count t's frequency of its characters
+  let map = {}, uniqueChars = 0;
+  for (let char of t) {
+    if (char in map) {
+      map[char] += 1;
+    } else {
+      map[char] = 1;
+      uniqueChars += 1;
+    }
+  }
+  
+  let ans = '';
+  let left = 0, match = 0;
+  for (let right = 0; right < s.length; right++) {
+    let rightChar = s[right];
+    if (rightChar in map) {
+      map[rightChar] -= 1;
+      if (map[rightChar] === 0) match += 1;
     }
     
-    let left = 0;
-    let right = 0;
-    let neededLength = Object.keys(neededChars).length;
-    let substring = '';
-    
-    while (right < s.length) {
-        const rightChar = s[right];
-        neededChars[rightChar]--;
-        if (neededChars[rightChar] === 0) neededLength--;
-        
-        while (neededLength === 0) {
-            if (!substring || substring.length > right - left + 1) {
-                substring = s.slice(left, right + 1);
-            }
-            
-            const leftChar = s[left];
-            // If the leftChar in charMap is at exactly 0 before being 
-            // incremented, we now need more leftChars so that its count
-            // in charMap goes down to exactly 0
-            if (neededChars[leftChar] === 0) {
-                neededLength++;
-            }
-            neededChars[leftChar]++;
-            left++;
-               
-        }
-        
-        right++;
+    if (match === uniqueChars) { // there is a solution
+      // try to shrink the window from the left
+      while (match === uniqueChars) {
+        let leftChar = s[left++];
+        if (map[leftChar] === 0) match -= 1;
+        map[leftChar] += 1;
+      }
+      
+      // record the solution, notice that you need to use left-1 instead of left when slicing
+      let solution = s.slice(left-1, right+1);
+      ans = (ans === '')? solution: (ans.length > solution.length)? solution: ans;
     }
-    
-    return substring;
-
-
-
-    // if (s === t) {
-    //     return s;
-    // }  
-    // let ans = "";
-    // const mapT = new Map(); // frequency of t
-    // for (const ch of t) {
-    //     mapT.set(ch, (mapT.get(ch) || 0) + 1);
-    // }
-
-    // let mct = 0; // match count
-    // const dmct = t.length; // desired match count
-    // const mapS = new Map();
-    // let i = -1;
-    // let j = -1;
-
-    // while (true) {
-    //     let f1 = false;
-    //     let f2 = false;
-
-    //     // Acquire the character
-    //     while (i < s.length - 1 && mct < dmct) {
-    //         i++;
-    //         const ch = s[i];
-    //         mapS.set(ch, (mapS.get(ch) || 0) + 1);
-
-    //         if (mapS.get(ch) <= mapT.get(ch) || 0) {
-    //             mct++;
-    //         }
-    //         f1 = true;
-    //     }
-
-    //     // Collect answers and release
-    //     while (j < i && mct === dmct) {
-    //         j++;
-    //         const pans = s.substring(j, i + 1); // pans = potential answer
-    //         if (ans.length === 0 || pans.length < ans.length) {
-    //             ans = pans;
-    //         }
-
-    //         const ch = s[j];
-    //         if (mapS.get(ch) === 1) {
-    //             mapS.delete(ch);
-    //         } else {
-    //             mapS.set(ch, mapS.get(ch) - 1);
-    //         }
-
-    //         if ((mapS.get(ch) || 0) < (mapT.get(ch) || 0)) {
-    //             mct--;
-    //         }
-    //         f2 = true;
-    //     }
-    //     if (!f1 && !f2) {
-    //         break;
-    //     } 
-    // }
-    // return ans;
+  }
+  return ans;
 
 };
