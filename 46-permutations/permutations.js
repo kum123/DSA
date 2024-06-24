@@ -3,18 +3,22 @@
  * @return {number[][]}
  */
 var permute = function(nums) {
-      const result = [];
-    const backtrack = (nums, path) => {
-        if (nums.length === 0) {
-            result.push(path);
-            return;
+      const permutations = [];
+    
+    function backtrack(start) {
+        if (start === nums.length) {
+            permutations.push([...nums]);
+        } else {
+            for (let i = start; i < nums.length; i++) {
+                [nums[start], nums[i]] = [nums[i], nums[start]];
+                backtrack(start + 1);
+                [nums[start], nums[i]] = [nums[i], nums[start]];
+            }
         }
-        for (let i = 0; i < nums.length; i++) {
-            backtrack([...nums.slice(0, i), ...nums.slice(i + 1)], [...path, nums[i]]);
-        }
-    };
-    backtrack(nums, []);
-    return result;
+    }
+    
+    backtrack(0);
+    return permutations;
 
 // let res = [];
 //     dfs(nums, [], Array(nums.length).fill(false), res);
