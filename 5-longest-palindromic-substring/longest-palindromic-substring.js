@@ -8,80 +8,97 @@
  */
 
 
-var longestPalindrome = function(str) {
+var longestPalindrome = function(s) {
     
 
- var max = '';
-  for (var i = 0; i < str.length; i++) {
-    // this loop is to take into account 
-    // different palindromes like 'aba' and 'abba'
-    for (var j = 0; j < 2; j++) {
-      var left = i;
-      var right = i + j;
-      while (str[left] && str[left] === str[right]) {
-        left--;
-        right++;
-      }
-      // here imagine we get into string like
-      // "sabbad", then
-      // right = 5
-      // left = 0
-      // and actual length of "abba" should be "4"
-      // 5 - 0 - 1 === 4
-      if ((right - left - 1) > max.length) {
-        max = str.substring(left + 1, right);
-      }
-        
-    }
-  }
-  return max;
+//  Brute force will be O(N)3 the best time complexity will be O(N)2
+//     let longest = "";
 
+//     for (let i = 0; i < s.length; i++) {
+//         let odd = expandAroundCenter(i, i);
+//         let even = expandAroundCenter(i, i + 1);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     if(str.length < 1 || str === null) return '';
-//     let longest = '';
-
-//     for(let i = 0; i < str.length; i++) {
-                    
-               
-//                 let oddPolindrom = expandFromCenter(str,i-1,i+1);
-//                 let evenPolindrom = expandFromCenter(str,i-1,i);
-//                 if(oddPolindrom.length > longest.length){
-//                     longest = oddPolindrom;
-//                 }
-//                 if(evenPolindrom.length > longest.length){
-//                     longest = evenPolindrom;
-//                 }
-                
+//         if (odd.length > longest.length) {
+//             longest = odd;
 //         }
-// return longest;
+
+//         if (even.length > longest.length) {
+//             longest = even;
+//         }
+//     }
+
+//     return longest;
+
+
+
+//  function expandAroundCenter(left, right) {
+//         while (left >= 0 && right < s.length && s[left] === s[right]) {
+//             left--;
+//             right++;
+//         }
+//         return s.substring(left + 1, right);
+//     }
+
+let longest = "";
+
+        for(let i=0; i < s.length;i++){
+
+            let odd = expandFromCenter(i,i);
+            let even = expandFromCenter(i,i+1);
+
+            if(odd.length > longest.length){
+                    longest = odd;
+            }
+            if(even.length > longest.length){
+                    longest = even;
+            }
+        }
+
+        return longest;
+
+function expandFromCenter(left,right){
+
+            while(left >= 0 && right < s.length && s[left] == s[right]){
+                left--;
+                right++;
+            }
+           // console.log(left+1,right,s.substring(left+1,right))
+          return  s.substring(left+1,right);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    
 };
 
 
-expandFromCenter=(str,left,right)=>{
-
-        let i = 0;
-    while(str[left - i] && str[left - i] === str[right + i]){
-
-        i++;
-    }
-    i--;
-return str.slice(left - i, right + i + 1)
-}
 
 
