@@ -40,6 +40,14 @@ var ladderLength = function(beginWord, endWord, wordList) {
 
 //     return 0;
 
+// The time complexity is O(N * M * 26) where
+// N = number of words,
+// M = length of each word
+// technically you can drop the 26 since its a constant
+
+   if (!wordList.includes(endWord)) {
+        return 0;
+    }
     const wordSet = new Set(wordList)
     let queue = [beginWord];
     let steps = 1;
