@@ -7,37 +7,33 @@
 var ladderLength = function (beginWord, endWord, wordList) {
 
 
+if (!wordList.includes(endWord)) {
+        return 0;
+    }
+let wordSet = new Set(wordList);
+let queue = [beginWord];
+let steps = 1;
 
+while(queue.length){
+    let next = [];
+    for(let word of queue){
+        if(word === endWord) return steps;
+        for(let i =0; i < word.length;i++){
 
-            if(!wordList.includes(endWord)) return 0;
-            let wordSet = new Set(wordList);
-            let queue = [beginWord];
-            let steps = 1;
-
-            while(queue.length) {
-                let next = [];
-                for(let word of queue){
-                        if(word == endWord) return steps;
-                    for(let i=0; i < word.length;i++){
-                        for(let j=0; j < 26;j++){
-                            let newWord = word.slice(0,i) + String.fromCharCode(j+97) + word.slice(i+1);
-
-                            if(wordSet.has(newWord)){
-                                next.push(newWord);
-                                wordSet.delete(newWord)
-                            }
-                        }
+                for(let j=0; j < 26;j++){
+                    let newWord = word.slice(0,i) + String.fromCharCode(j+97) + word.slice(i+1);
+                    if(wordSet.has(newWord)){
+                        next.push(newWord);
+                        wordSet.delete(newWord);
                     }
-                   
                 }
-                 queue = next;
-                    steps++;
-            }
-
-
+        }
+    }
+    queue = next;
+    steps++;
+}
 
 return 0;
-
 
 
 
@@ -80,7 +76,7 @@ return 0;
 
     //                 // if the new word exist in the word list add it to the queue
     //                 if (wordSet.has(newWord)) {
-    //                     console.log("newWord", newWord, i, j, String.fromCharCode(j + 97));
+    //                    // console.log("newWord", newWord, i, j, String.fromCharCode(j + 97));
     //                     // we will push to the new array and it will be helpfull to find next nearest word
     //                     next.push(newWord);
     //                     /* the found word is not required to keep in wordSet and it's easy to find remaining steps and it will avoid making conflict with exist words */
