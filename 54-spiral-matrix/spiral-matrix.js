@@ -36,29 +36,29 @@ var spiralOrder = function(matrix) {
     // }
     // if(N==1) ans.push(matrix[row][col]);
     // return ans;
-  let r = matrix.length, c=matrix[0].length;
-    let [left, right, top, bottom] = [0, c-1, 0, r-1];
+  let rowLength = matrix.length, colLength=matrix[0].length;
+    let [col, colSize, row, rowSize] = [0, colLength-1, 0, rowLength-1];
 
     let arr = [];
 
-    while(left<=right && top <= bottom){
-        for(let i=left; i<=right; i++) arr.push(matrix[top][i])
-        top++;
+    while(col<=colSize && row <= rowSize){
+        for(let i=col; i<=colSize; i++) arr.push(matrix[row][i])
+        row++;
 
 
-        for(let i=top; i<=bottom; i++) arr.push(matrix[i][right])
-        right--;
+        for(let i=row; i<=rowSize; i++) arr.push(matrix[i][colSize])
+        colSize--;
 
 
-        if(top<=bottom){               // condition 1
-            for(let i=right; i>=left; i--) arr.push(matrix[bottom][i])
-            bottom--;
+        if(row<=rowSize){               // condition 1
+            for(let i=colSize; i>=col; i--) arr.push(matrix[rowSize][i])
+            rowSize--;
         }
       
 
-        if(left<=right){               // condition 2
-            for(let i=bottom; i>=top; i--) arr.push(matrix[i][left])
-            left++;
+        if(col<=colSize){               // condition 2
+            for(let i=rowSize; i>=row; i--) arr.push(matrix[i][col])
+            col++;
         }
       
         
