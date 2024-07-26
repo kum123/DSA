@@ -7,14 +7,14 @@ var twoSum = function(nums, target) {
 
 
 
-let map = new Map();
-for(let i=0; i < nums.length;i++){
-    if(map.has(nums[i])){
-        return [map.get(nums[i]),i];
-    }
-    map.set(target-nums[i],i);
+// let map = new Map();
+// for(let i=0; i < nums.length;i++){
+//     if(map.has(nums[i])){
+//         return [map.get(nums[i]),i];
+//     }
+//     map.set(target-nums[i],i);
     
-}
+// }
 
 
 
@@ -47,14 +47,14 @@ for(let i=0; i < nums.length;i++){
 
 
 
-    // let hashMap=new Map();
-    // for(let i=0; i < nums.length;i++){
-    //     if(hashMap[nums[i]] >= 0){
-    //     return [hashMap[nums[i]],i];
-    //     }else{
-    //     hashMap[target - nums[i]] = i;
-    // }
-    //  }
+    let hashMap=new Map();
+    for(let i=0; i < nums.length;i++){
+        if(hashMap[nums[i]] >= 0){
+        return [hashMap[nums[i]],i];
+        }else{
+        hashMap[target - nums[i]] = i;
+    }
+     }
 
   
    return null;
