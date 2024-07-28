@@ -29,13 +29,13 @@ var lengthOfLIS = function(nums) {
 
         for(let i=1;i < N;i++){
 
-            for(let j=0;j < i;j++){
+            for(let j=i-1;j>=0;j--){
            // console.log("i",i,"DP[i]",DP[i],"j",j,"DP[j]",DP[j]);
-                if(nums[i] > nums[j]){
+                if(nums[j] < nums[i]){
                 DP[i] = Math.max(DP[i],DP[j]+1);
                 }
             }
         }
 
-        return Math.max(...DP);
+         return Math.max(...DP);
 };
