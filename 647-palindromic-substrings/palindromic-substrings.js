@@ -17,6 +17,13 @@ var countSubstrings = function(s) {
 
         let ans = 0;
     for(let i=0; i < s.length;i++){
+        /* the reason behind keeping below logic there will be two possibalities even and odd strings 
+                // even size and here expansion should perform like i,i+1
+                s = "ab|ba";
+                // odd size and here expansion should perform like i-1,i+1
+                s = "ab|c|ba";
+        
+         */
         let even = isPolindrome(s,i,i+1);
         let odd = isPolindrome(s,i-1,i+1);
         ans += odd + even + 1;
