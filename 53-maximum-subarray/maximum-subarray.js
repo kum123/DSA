@@ -6,13 +6,14 @@ var maxSubArray = function(nums) {
 
 
 
-        let maxSumSub = -Infinity;
-        let prev = 0;
-        for(let i=0; i < nums.length;i++){
-           prev = Math.max(prev+nums[i],nums[i]);
-            maxSumSub = Math.max(maxSumSub,prev);
-        }
-        return maxSumSub;
+     let maxSum = -Infinity;
+     let prev = 0;
+     for(let i=0; i < nums.length;i++){
+        prev = Math.max(prev+nums[i],nums[i]);
+        maxSum = Math.max(maxSum,prev);
+     }
+
+     return maxSum;
 
 
 
